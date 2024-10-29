@@ -513,12 +513,12 @@ docListFile.close()
 if os.environ.get('GITHUB_EVENT_NAME')!='schedule':
     print("====== update readme file ======")
     workspace_path = os.environ.get('GITHUB_WORKSPACE')
-    readme="# %s :link: %s \r\n" % (blog.blogBase["title"],blog.blogBase["homeUrl"])
-    readme=readme+"### :page_facing_up: [%d](%s/tag.html) \r\n" % (len(blog.blogBase["postListJson"])-1,blog.blogBase["homeUrl"])
-    readme=readme+"### :speech_balloon: %d \r\n" % commentNumSum
-    readme=readme+"### :hibiscus: %d \r\n" % wordCount
-    readme=readme+"### :alarm_clock: %s \r\n" % datetime.datetime.now(blog.TZ).strftime('%Y-%m-%d %H:%M:%S')
-    readme=readme+"### Powered by :heart: [Gmeek](https://github.com/Meekdai/Gmeek)\r\n"
+    readme="# %s: %s \r\n" % (blog.blogBase["title"],blog.blogBase["homeUrl"])
+    readme=readme+"### :page_facing_up: Articles: [%d](%s/tag.html) | " % (len(blog.blogBase["postListJson"])-1,blog.blogBase["homeUrl"])
+    readme=readme+":speech_balloon: Comments: %d \r\n" % commentNumSum
+    readme=readme+":hibiscus: WordCounts: %d \r\n" % wordCount
+    readme=readme+":alarm_clock: %s \r\n" % datetime.datetime.now(blog.TZ).strftime('%Y-%m-%d %H:%M:%S')
+    # readme=readme+"Powered by :heart: [Gmeek](https://github.com/Meekdai/Gmeek)\r\n"
     readmeFile=open(workspace_path+"/README.md","w")
     readmeFile.write(readme)
     readmeFile.close()
