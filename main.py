@@ -229,7 +229,7 @@ def add_md_label(repo, md, me):
             for issue in issues:
                 if not issue:
                     continue
-                if (issue in skip_issues) and (label != DRAFT_LABEL):
+                if (issue in skip_issues) and (label.name != DRAFT_LABEL):
                     continue
                 if is_me(issue, me):
                     if i == ANCHOR_NUMBER:
