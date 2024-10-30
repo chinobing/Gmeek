@@ -20,8 +20,8 @@ TOP_ISSUES_LABELS = ["Top"]
 TODO_ISSUES_LABELS = ["TODO"]
 FRIENDS_LABELS = ["Friends"]
 ABOUT_LABELS = ["About"]
-OTHER_LABELS = ['草稿']
-IGNORE_LABELS = FRIENDS_LABELS + TOP_ISSUES_LABELS + TODO_ISSUES_LABELS + ABOUT_LABELS + OTHER_LABELS
+DRAFT_LABELS = ['草稿']
+IGNORE_LABELS = FRIENDS_LABELS + TOP_ISSUES_LABELS + TODO_ISSUES_LABELS + ABOUT_LABELS
 
 FRIENDS_TABLE_HEAD = "| Name | Link | Desc | \n | ---- | ---- | ---- |\n"
 FRIENDS_TABLE_TEMPLATE = "| {name} | {link} | {desc} |\n"
@@ -228,6 +228,8 @@ def add_md_label(repo, md, me):
             i = 0
             for issue in issues:
                 if not issue:
+                    continue
+                if issue.label in DRAFT_LABELS:
                     continue
                 if is_me(issue, me):
                     if i == ANCHOR_NUMBER:
