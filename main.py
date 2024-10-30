@@ -220,6 +220,8 @@ def add_md_label(repo, md, me):
             # we don't need add top label again
             if label.name in IGNORE_LABELS:
                 continue
+            if label.name in SKIP_LABELS:
+                skip_issues = get_issues_from_label(repo, label)
 
             issues = get_issues_from_label(repo, label)
             if issues.totalCount:
@@ -229,13 +231,14 @@ def add_md_label(repo, md, me):
             for issue in issues:
                 if not issue:
                     continue
+                if issue in skip_issues:
+                    continue
                 if is_me(issue, me):
                     if i == ANCHOR_NUMBER:
                         md.write("<details><summary>显示更多</summary>\n")
                         md.write("\n")
-                    if not any(label in issue.get_labels() for label in SKIP_LABELS):
-                        add_issue_info(issue, md)
-                        i += 1
+                    add_issue_info(issue, md)
+                    i += 1
             if i > ANCHOR_NUMBER:
                 md.write("</details>\n")
                 md.write("\n")
