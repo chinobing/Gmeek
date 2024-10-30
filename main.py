@@ -216,7 +216,7 @@ def add_md_label(repo, md, me):
     )
 
     with open(md, "a+", encoding="utf-8") as md:
-        skip_issues = get_issues_from_label(repo, SKIP_LABEL)
+        skip_issues = get_issues_from_label(repo, DRAFT_LABEL)
         for label in labels:
             # we don't need add top label again
             if label.name in IGNORE_LABELS:
@@ -229,7 +229,7 @@ def add_md_label(repo, md, me):
             for issue in issues:
                 if not issue:
                     continue
-                if (issue in skip_issues) and (label != SKIP_LABEL):
+                if (issue in skip_issues) and (label != DRAFT_LABEL):
                     continue
                 if is_me(issue, me):
                     if i == ANCHOR_NUMBER:
