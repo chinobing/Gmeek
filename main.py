@@ -229,14 +229,13 @@ def add_md_label(repo, md, me):
             for issue in issues:
                 if not issue:
                     continue
-                if any(label in issue.get_labels() for label in SKIP_LABELS):
-                    continue
                 if is_me(issue, me):
                     if i == ANCHOR_NUMBER:
                         md.write("<details><summary>显示更多</summary>\n")
                         md.write("\n")
-                    add_issue_info(issue, md)
-                    i += 1
+                    if not any(label in issue.get_labels() for label in SKIP_LABELS):
+                        add_issue_info(issue, md)
+                        i += 1
             if i > ANCHOR_NUMBER:
                 md.write("</details>\n")
                 md.write("\n")
