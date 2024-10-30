@@ -222,6 +222,8 @@ def add_md_label(repo, md, me):
                 continue
             if label.name in SKIP_LABELS:
                 skip_issues = get_issues_from_label(repo, label)
+            else:
+                skip_issues = []
 
             issues = get_issues_from_label(repo, label)
             if issues.totalCount:
